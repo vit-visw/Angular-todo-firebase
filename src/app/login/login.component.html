@@ -1,0 +1,46 @@
+
+
+<div class="app-login-form">
+   
+    <h2>{{ isLoginMode ? 'Login' : 'Signup' }} Here</h2>
+    
+    <ng-container *ngIf="isLoading">
+    
+        <div class="loader"></div>
+    
+   </ng-container>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmitted()" *ngIf="!isLoading">
+        <div class="form-input">
+            <label>Email Address</label>
+            <input type="email"
+                placeholder="Email address"
+                formControlName="email" #email
+            >
+            <small class="text text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                Valid email is required
+            </small>
+        </div>
+        
+        <div class="form-input">
+            <label>Password</label>
+            <input type="password"
+                placeholder="Password"
+                formControlName="password" #password
+            >
+            <small class="text text-danger" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                Password must be at least 8 characters
+            </small>
+        </div>           
+        
+        <button type="submit" class="app-login-btn" [disabled]="!loginForm.valid">
+            {{ isLoginMode ? 'Login' : 'Signup' }}
+        </button>
+        
+        <p>{{ isLoginMode ? 'Do not have an account yet?' : 'Already have an account?' }} 
+            <button class="app-toggle-btn" type="button" (click)="onSwitchMode()">
+                {{ isLoginMode ? 'Register Here.' : 'Login Here' }}
+            </button>
+        </p> 
+    </form> 
+</div>
