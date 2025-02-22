@@ -1,15 +1,22 @@
 <div class="container-fluid">
   <div class="row d-flex">
+     <div class="col-12">
+        <ng-container *ngIf="errorMesage">
+            <div  class="alert alert-danger" >
+                {{errorMesage}}
+            </div></ng-container>
+     </div>
   
       <div class="col-md-8">
           <div class="card">
-              <div class="card-header bg-success text-white">
-                  <h1>Employee List</h1> 
+              <div class="card-header bg-primary text-white">
+                  <h1>Employee List</h1>
+                 
               </div> 
               <div class="card-body"> 
-                  <div class="table-responsive">
+                <div class="table-responsive">
                       <table class="table table-bordered">
-                          <thead>
+                          <thead class="text-center">
                               <tr>
                                   <th>Sr No</th>
                                   <th>Name</th>
@@ -18,7 +25,9 @@
                                   <th>Action</th>
                               </tr>
                           </thead>
-                          <tbody>
+                          <tbody class="text-center">
+                            
+                           <ng-container *ngIf="!showLoader">
                             <ng-container *ngIf="employeeList.length > 0; else noItemsConst">
                                 <tr  *ngFor="let item of employeeList; let i = index; trackBy: trackByEmpId">
                                     <td>{{ i + 1 }}</td>
@@ -26,8 +35,8 @@
                                     <td>{{ item.contactNum }}</td>
                                     <td>{{ item.emailId }}</td> 
                                     <td class="text-center"> 
-                                        <button class="btn btn-primary me-2" (click)="OnEdit(item)">Edit</button> 
-                                        <button class="btn btn-danger" (click)="OnDelete(item.id)">Delete</button>
+                                        <button class="btn btn-primary me-2" (click)="onEdit(item)">Edit</button> 
+                                        <button class="btn btn-danger" (click)="onDelete(item.id)">Delete</button>
                                         
                                     </td>
                                 </tr>
@@ -40,6 +49,16 @@
                                     </td>
                                 </tr>
                             </ng-template>
+                           </ng-container>  
+                           <ng-container *ngIf="showLoader">
+                            <tr >
+                            <td colspan="5">
+                                <div class="loader"></div>
+                             </td>
+                            </tr>
+                           </ng-container>
+                           
+                            
                             
                           </tbody>
                       </table>
@@ -51,7 +70,7 @@
  
       <div class="col-md-4">
           <div class="card">
-              <div class="card-header bg-success text-white">
+              <div class="card-header bg-primary text-white">
                   New Employee
               </div>
               <div class="card-body">
@@ -104,7 +123,7 @@
                               <button class="btn btn-secondary" (click)="onReset()">Reset</button>
                           </div>
                           <div class="col-6 text-center">
-                            <button class="btn btn-primary" (click)="LoadAllData()">Load</button>
+                            <button class="btn btn-primary" (click)="loadAllData()">Load</button>
                         </div>
                           <div class="col-6 text-center">
                           <ng-container *ngIf="employeeForm.controls['id'].value === null || employeeForm.controls['id'].value === undefined; else updateappears">
