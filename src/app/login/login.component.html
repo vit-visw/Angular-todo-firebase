@@ -4,13 +4,13 @@
    
     <h2>{{ isLoginMode ? 'Login' : 'Signup' }} Here</h2>
     
-    <ng-container *ngIf="isLoading">
+    <ng-container *ngIf="isLoading; else formDisplay">
     
         <div class="loader"></div>
     
    </ng-container>
-    
-    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmitted()" *ngIf="!isLoading">
+    <ng-template #formDisplay>
+    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmitted()">
         <div class="form-input">
             <label>Email Address</label>
             <input type="email"
@@ -36,6 +36,9 @@
         <button type="submit" class="app-login-btn" [disabled]="!loginForm.valid">
             {{ isLoginMode ? 'Login' : 'Signup' }}
         </button>
+        <small class="text text-danger" *ngIf="errorMessage">{{errorMessage}}
+          
+        </small>
         
         <p>{{ isLoginMode ? 'Do not have an account yet?' : 'Already have an account?' }} 
             <button class="app-toggle-btn" type="button" (click)="onSwitchMode()">
@@ -43,4 +46,5 @@
             </button>
         </p> 
     </form> 
+    </ng-template>
 </div>
