@@ -42,39 +42,27 @@ export class LoginComponent {
   }
 
   onFormSubmitted() { 
-    // console.log(this.loginForm.value); 
-
-    if (!this.isLoginMode) { 
-     
-      this.isLoading=true;
+    if (!this.isLoginMode) { // REGISTER
+        this.isLoading = true;
         const { email, password } = this.loginForm.value; 
         this.authService.signup(email, password).subscribe({ 
-            next: (res) => {console.log(res);this.isLoading=false;
-              this.loginForm.reset();
-            }, 
-            error: (err) => {
-              console.log(err);
-              this.errorMessage=err.error.error.message; 
-              this.isLoading=false;
+            next: () => { this.isLoading = false; },
+            error: (err) => { 
+                this.errorMessage = err.error.error.message; 
+                this.isLoading = false; 
             }
         });
-      
-    } 
-    else{
-      this.isLoading=true;
+    } else { // LOGIN
+        this.isLoading = true;
         const { email, password } = this.loginForm.value; 
         this.authService.login(email, password).subscribe({ 
-            next: (res) => {console.log(res);this.isLoading=false;
-             this.loginForm.reset();
-            }, 
-            error: (err) => {
-              console.log(err);
-              this.errorMessage=err.error.error.message; 
-              this.isLoading=false;
+            next: () => { this.isLoading = false; },
+            error: (err) => { 
+                this.errorMessage = err.error.error.message; 
+                this.isLoading = false; 
             }
         });
     }
-    
 }
 
 

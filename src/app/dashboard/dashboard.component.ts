@@ -93,10 +93,7 @@ export class DashboardComponent {
       this.employeeObj = new EmployeeModel();
       this.createForm();
   });
-                // this.employeeService.addEmployee(this.employeeForm.value);
-                // this.loadAllData();
-                // this.employeeObj=new EmployeeModel();
-                // this.createForm();
+             
   }
 
   onUpdate(): void {

@@ -7,11 +7,12 @@ import { EmployeeService } from './services/employee.service';
 import { catchError, throwError } from 'rxjs';
 import { LoggingService } from './services/Logging.Service';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,HttpClientModule,RouterModule],
+  imports: [CommonModule, ReactiveFormsModule,HttpClientModule,RouterModule,HeaderComponent],
   providers:[EmployeeService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
