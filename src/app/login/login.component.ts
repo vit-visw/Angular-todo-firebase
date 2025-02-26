@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { EmailValidator, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Router } from '@angular/router';
 import { Login } from '../model/Login';
@@ -29,6 +29,8 @@ export class LoginComponent {
  
 
   constructor() {
+
+    
     
     this.loginForm = new FormGroup({
       email: new FormControl(this.loginObject.email, [Validators.required, Validators.email]),

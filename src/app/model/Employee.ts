@@ -7,7 +7,9 @@ export class EmployeeModel{
     contactNum:string;
     address:string;
     pincode:string;
+    usermail?:string;
     id?: string;
+    // userId?:string;
 
     constructor(){
      

@@ -1,0 +1,90 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white text-center">
+            <h3>User Profile</h3>
+          </div>
+          <div class="card-body">
+            <p><strong>Email:</strong> {{ userEmail }}</p>
+  
+            <div *ngIf="userProfile">
+              <p><strong>Name:</strong> {{ userProfile.name }}</p>
+              <p><strong>City:</strong> {{ userProfile.city }}</p>
+              <p><strong>State:</strong> {{ userProfile.state }}</p>
+              <p><strong>Contact Number:</strong> {{ userProfile.contactNum }}</p>
+              <p><strong>Address:</strong> {{ userProfile.address }}</p>
+              <p><strong>Pincode:</strong> {{ userProfile.pincode }}</p>
+            </div>
+  
+            <button class="btn btn-warning w-100 mt-3" (click)="openModal()">
+              Update Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4>Profile Dashboard</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Email:</strong> {{ userEmail }}</p>
+        <p><strong>Employees Added:</strong> {{ employeeCount }}</p>
+      </div>
+    </div>
+  
+  <!-- Profile Update Modal -->
+  <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="editProfileModalLabel">Update Profile</h5>
+          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="profileForm" (ngSubmit)="onSave()">
+            <div class="mb-3">
+              <label class="form-label">Name:</label>
+              <input class="form-control" formControlName="name" type="text" />
+            </div>
+            <small class="text-danger" *ngIf="profileForm.controls['name'].invalid && profileForm.controls['name'].touched">
+               Please Enter the Value
+            </small>
+  
+            <div class="mb-3">
+              <label class="form-label">City:</label>
+              <input class="form-control" formControlName="city" type="text" />
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">State:</label>
+              <input class="form-control" formControlName="state" type="text" />
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Contact Number:</label>
+              <input class="form-control" formControlName="contactNum" type="text" />
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Address:</label>
+              <input class="form-control" formControlName="address" type="text" />
+            </div>
+  
+            <div class="mb-3">
+              <label class="form-label">Pincode:</label>
+              <input class="form-control" formControlName="pincode" type="text" />
+            </div>
+  
+            <button type="submit" class="btn btn-success w-100" [disabled]="profileForm.invalid">
+              Save Changes
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

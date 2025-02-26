@@ -1,17 +1,20 @@
-export class User{
+export class User {
     constructor(
-        public email: string,
-        public id: string,
-        private _token: string,
-        private _expiresIn: Date
-    
-){
-        
-} 
-get token(){ 
-    if(!this._expiresIn || this._expiresIn < new Date()){ 
-        return null; 
-    } 
-    return this._token; 
-} 
-}
+      public email: string,
+      public id: string,
+      private _token: string,
+      public _tokenExpirationDate: Date
+    ) {}
+  
+    get token() {
+      if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
+        return null;
+      }
+      return this._token;
+    }
+  
+    // get tokenExpirationDate() {
+    //   return this._tokenExpirationDate;
+    // }
+  }
+  

@@ -1,0 +1,18 @@
+.active{
+    
+    font-weight: bold;
+   
+
+}
+.nav-link:hover{
+ 
+    font-weight: bold;
+    cursor: pointer;
+  
+}
+.nav-link button{
+    border: none; 
+    background-color: transparent;
+    outline: none;
+    font-weight: inherit;
+}
