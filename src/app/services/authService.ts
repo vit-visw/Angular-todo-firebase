@@ -7,6 +7,7 @@ import { User } from "../model/User";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+    
     private userSubject = new BehaviorSubject<User | null>(null);
     user$ = this.userSubject.asObservable();
     private tokenExpirationTimer: any;
@@ -94,4 +95,5 @@ export class AuthService {
         this.autoLogout(Number(res.expiresIn) * 1000);
         this.router.navigate(['/home']);
     }
+   
 }

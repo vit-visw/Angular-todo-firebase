@@ -1,3 +1,4 @@
+import { AdminService } from './../services/admin.service';
 import { Component, ElementRef, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/authService';
@@ -12,6 +13,7 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent {
   constructor(
   public authService: AuthService,
+  public adminService:AdminService,
   private router: Router,
   private el: ElementRef)
   {}

@@ -1,0 +1,59 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Admin Dashboard</h2>
+    <h4>Employee Details</h4>
+    <table class="table table-bordered border-warning">
+      <thead>
+        <tr>
+           
+          <th>Name</th>
+          <th>Email</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Pincode</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.emailId }}</td>
+          <td>{{ emp.city }}</td>
+          <td>{{ emp.state }}</td>
+          <td>{{ emp.contactNum }}</td>
+          <td>{{emp.address}}</td>
+          <td>{{emp.pincode}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h4>Profile Details</h4>
+    <table class="table table-bordered border-primary">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Contact</th>
+            <th>Pincode</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of profiles">
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.email}}</td>
+            <td>{{ emp.city }}</td>
+            <td>{{ emp.state }}</td>
+            <td>{{ emp.contactNum }}</td>
+            <td>{{emp.pincode}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="container ms-auto">
+  <div class="row">
+    <div class="col-12">
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</div> 

@@ -22,7 +22,8 @@ export class ProfileComponent implements OnInit {
   modalInstance: any;
   employeeCount: number = 0;
   employees: EmployeeModel[] = [];
- 
+  showLoader:boolean=false;
+  updatestatusmessage?:string;
 
   constructor(
     private fb: FormBuilder,
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
 
     this.authService.user$.subscribe((user: User | null) => {
       if (user) {
+        this.showLoader=true;
         this.userEmail = user.email;
         this.userId = user.id;
         this.loadUserProfile();
@@ -77,10 +79,19 @@ export class ProfileComponent implements OnInit {
 
   // Load existing user profile data
   loadUserProfile() {
+    this.showLoader=true;
     this.profileService.getProfile(this.userId).subscribe((data) => {
       if (data) {
         this.userProfile = data;
         this.profileForm.patchValue(data);
+        this.showLoader = false;
+      }
+      else{
+        setTimeout(()=>{
+          this.showLoader=false;
+         this.updatestatusmessage="Please update the details";
+
+        },5000)
       }
     });
   }
@@ -108,6 +119,7 @@ export class ProfileComponent implements OnInit {
 
     this.profileService.updateProfile(profileData).subscribe(() => {
       alert('Profile Updated Successfully!');
+      this.updatestatusmessage='';
       this.userProfile = profileData;
       this.closeModal(); // Close modal after saving
     });

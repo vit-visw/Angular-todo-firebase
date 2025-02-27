@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Login } from '../model/Login';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/authService';
+import { AdminService } from '../services/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
  
   router: Router = inject(Router);
   fb: FormBuilder = inject(FormBuilder);
+  adminserv:AdminService=inject(AdminService);
   authService:AuthService=inject(AuthService);
   loginForm: FormGroup=new FormGroup({});
   loginObject:Login=new Login()
@@ -44,7 +46,9 @@ export class LoginComponent {
   }
 
   onFormSubmitted() { 
-    if (!this.isLoginMode) { // REGISTER
+    this.adminserv.logoutauto();
+    if (!this.isLoginMode) { 
+      // REGISTER
         this.isLoading = true;
         const { email, password } = this.loginForm.value; 
         this.authService.signup(email, password).subscribe({ 
