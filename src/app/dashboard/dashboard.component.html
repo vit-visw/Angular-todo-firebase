@@ -36,8 +36,8 @@
                                       <td>{{ item.emailId }}</td> 
                                       <td class="text-center"> 
                                           <button class="btn btn-primary me-2" (click)="onEdit(item)">Edit</button> 
-                                          <button class="btn btn-danger" (click)="onDelete(item.id)">Delete</button>
-                                          
+                                          <button class="btn btn-danger me-2" (click)="onDelete(item.id)">Delete</button>
+                                          <button class="btn btn-secondary me-2" (click)="openModal(item)" >View</button>
                                       </td>
                                   </tr>
                               </ng-container>
@@ -149,4 +149,22 @@
   </div>
   
   
-  
+  <div class="modal fade" id="viewEmployeeModal" tabindex="-1" aria-labelledby="viewEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="editProfileModalLabel">Employee Details</h5>
+          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Name:</strong> {{ singleEmployeeDetais?.name }}</p>
+            <p><strong>Email:</strong>{{singleEmployeeDetais?.emailId}}</p>
+            <p><strong>City:</strong> {{ singleEmployeeDetais?.city}}</p>
+            <p><strong>State:</strong> {{ singleEmployeeDetais?.state }}</p>
+            <p><strong>Contact Number:</strong> {{ singleEmployeeDetais?.contactNum }}</p>
+            <p><strong>Address:</strong> {{ singleEmployeeDetais?.address }}</p>
+            <p><strong>Pincode:</strong> {{ singleEmployeeDetais?.pincode }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

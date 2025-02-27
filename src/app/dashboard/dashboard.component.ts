@@ -6,6 +6,7 @@ import { EmployeeModel } from '../model/Employee';
 import { EmployeeService } from '../services/employee.service';
 import { LoggingService } from '../services/Logging.Service';
 import { catchError, throwError } from 'rxjs';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,12 +21,18 @@ export class DashboardComponent {
   employeeForm: FormGroup = new FormGroup({});
   employeeList: EmployeeModel[] = [];
   employeeObj: EmployeeModel = new EmployeeModel();
+  modalInstance: any;
+  singleEmployeeDetais?:EmployeeModel|null;
 
   constructor(private employeeService: EmployeeService ,private loggingService:LoggingService) {}
 
   ngOnInit(): void {
     this.createForm();
     this.loadAllData();
+      const modalElement = document.getElementById('viewEmployeeModal');
+        if (modalElement) {
+          this.modalInstance = new Modal(modalElement);
+        }
   }
 
   loadAllData(): void {
@@ -127,5 +134,23 @@ export class DashboardComponent {
   trackByEmpId(index: number, employee: EmployeeModel): string |undefined {
     return employee.id;
   }
+
+
+  openModal(item:EmployeeModel) {
+    if (this.modalInstance) {
+      this.modalInstance.show();
+    }
+    this.singleEmployeeDetais=item;
+
+
+  }
+
+  closeModal() {
+    if (this.modalInstance) {
+      this.modalInstance.hide();
+      this.singleEmployeeDetais=null;
+    }
+  }
+
 
 }
