@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 
 import { CommonModule } from '@angular/common';
@@ -18,21 +18,23 @@ import { AdminService } from '../services/admin.service';
   templateUrl: './admin-component.component.html',
   styleUrl: './admin-component.component.css'
 })
-export class AdminDashboardComponent implements OnInit{
+export class AdminDashboardComponent implements OnInit,OnChanges{
   employees: EmployeeModel[] = [];
    profiles:any[]=[];
+   isLoading:boolean=false;
+   isLoading1:boolean=false;
   constructor(private admindashboardserv:AdminDashboardervice,private adminServ:AdminService) {}
-  // ngOnDestroy(): void {
-  // this.logout();
-  // }
-
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.isLoading=true;
+    this.isLoading1=true;
     this.admindashboardserv.getAllEmployees().subscribe(data => {
       this.employees = data;
+      this.isLoading=false;
     });
     this.admindashboardserv.getAllProfile().subscribe((data) => {
       if (data) {
        this.profiles=data;
+       this.isLoading1=false;
       }
       else{
         // setTimeout(()=>{
@@ -42,6 +44,31 @@ export class AdminDashboardComponent implements OnInit{
         // },5000)
       }
     });
+  }
+  LoadData(){
+    this.isLoading=true;
+    this.isLoading1=true;
+    this.admindashboardserv.getAllEmployees().subscribe(data => {
+      this.employees = data;
+      this.isLoading=false;
+    });
+    this.admindashboardserv.getAllProfile().subscribe((data) => {
+      if (data) {
+       this.profiles=data;
+       this.isLoading1=false;
+      }
+      else{
+        // setTimeout(()=>{
+        //   this.showLoader=false;
+        //  this.updatestatusmessage="Please update the details";
+
+        // },5000)
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.LoadData();
   }
 
   logout() {

@@ -109,6 +109,7 @@ export class DashboardComponent {
       console.log(data);
       this.loadAllData();
       this.employeeObj=new EmployeeModel();
+      
       this.createForm();
     });
   }
@@ -117,6 +118,10 @@ export class DashboardComponent {
     if (id && confirm('Are you sure want to delete?')) {
       this.employeeService.deleteEmployee(id).subscribe(() => {
         this.loadAllData();
+        this.employeeObj=new EmployeeModel();
+      
+        this.createForm();
+
       });
     }
   }

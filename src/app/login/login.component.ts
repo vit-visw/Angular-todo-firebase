@@ -46,7 +46,7 @@ export class LoginComponent {
   }
 
   onFormSubmitted() { 
-    this.adminserv.logoutauto();
+    // this.adminserv.logoutauto();
     if (!this.isLoginMode) { 
       // REGISTER
         this.isLoading = true;
